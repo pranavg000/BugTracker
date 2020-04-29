@@ -1,0 +1,16 @@
+<div class="row" style="margin: auto">
+  <div class="col-xs-12">
+    <a routerLink="new"> <button class="btn btn-primary">Add a developer</button></a>
+  </div>
+</div>
+<hr>
+<div class="row" style="margin: auto">
+  <div class="col-xs-12">
+    <div class="list-group">
+        <app-developer-list-item
+        *ngFor="let developer of developers; let i = index"
+        [developer]="developer"
+        [index]="i"></app-developer-list-item>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./developers.component.css']
 })
 export class DevelopersComponent implements OnInit {
-  // developersList:[Developer] = []
 
   constructor() { }
 
