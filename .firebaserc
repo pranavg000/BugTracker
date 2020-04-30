@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "bug-tracker-c5aeb": {
+      "hosting": {
+        "BugTracker": [
+          "bug-tracker-c5aeb"
+        ]
+      }
+    }
+  }
+}

@@ -1,25 +1,25 @@
-import { Bug } from 'src/app/bugs/bug/bug.model';
+import { Bug } from 'src/app/bugs/bug.model';
 
 export class Developer {
+    id: string;
     firstName: string;
     lastName: string;
     email: string;
-    bugsAssigned: Bug[];
 
-    constructor(firstName: string, lastName: string, email: string, bugsAssigned: Bug[] = []) {
+    constructor(id: string, firstName: string, lastName: string, email: string, bugsAssigned: Bug[] = []) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.bugsAssigned = bugsAssigned;
     }
 
     assignNewBug(bug: Bug) {
-        this.bugsAssigned.push(bug);
+        // this.bugsAssigned.push(bug);
     }
 
     removeBug(index: number) {
-        if(index < this.bugsAssigned.length)
-            this.bugsAssigned.splice(index, 1);
+        // if(index < this.bugsAssigned.length)
+        //     this.bugsAssigned.splice(index, 1);
     }
 
     update(value: {}){

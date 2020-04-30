@@ -1,23 +1,27 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DeveloperService } from '../developer.service';
 import { Developer } from '../developer.model';
+import { Subscription } from 'rxjs';
+import { IDeveloperTemp } from '../developer-temp.interface';
 
 @Component({
   selector: 'app-developer-edit',
   templateUrl: './developer-edit.component.html',
   styleUrls: ['./developer-edit.component.css']
 })
-export class DeveloperEditComponent implements OnInit {
+export class DeveloperEditComponent implements OnInit, OnDestroy {
 
-  id: number;
+  id: string;
   newUser: boolean;
+  developer: Developer;
   defValues = {
     firstName: "",
     lastName: "",
     email: ""
   };
+  devServiceSubscription: Subscription;
 
   constructor(private route: ActivatedRoute, private developerService: DeveloperService, private router: Router) { }
 
@@ -27,29 +31,40 @@ export class DeveloperEditComponent implements OnInit {
         this.newUser = params['id'] == null;
         this.id = params['id'];
         if(!this.newUser){
-          let developer: Developer = this.developerService.developers[this.id];
-          this.defValues =  {
-              firstName: developer.firstName,
-              lastName: developer.lastName,
-              email: developer.email
+          
+          if(this.devServiceSubscription)
+          this.devServiceSubscription.unsubscribe();
+          this.devServiceSubscription = this.developerService.getDeveloper(this.id).subscribe((data: IDeveloperTemp) => {
+            this.developer = new Developer(this.id, data['firstName'], data['lastName'], data['email']);
+            this.defValues =  {
+              firstName: this.developer.firstName,
+              lastName: this.developer.lastName,
+              email: this.developer.email
             }
+          });
+          
         }
       }
     )
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     let value: {} = form.value; 
-    let newId = -1;
+    let newId: string;
     if ( this.newUser ){  
-      newId = this.developerService.addNewDeveloper(new Developer(value['firstName'], value['lastName'], value['email']));
+      newId = await this.developerService.addNewDeveloper(<IDeveloperTemp>value);
     }
     else{
-      this.developerService.updateDeveloper(this.id, value);
+      this.developerService.updateDeveloper(this.id, <IDeveloperTemp>value);
       newId = this.id;
     }
     form.reset();
     this.router.navigate(['/developers', newId])
+  }
+
+  ngOnDestroy(): void {
+    if(this.devServiceSubscription)
+      this.devServiceSubscription.unsubscribe();
   }
 
 }

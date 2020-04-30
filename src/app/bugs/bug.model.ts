@@ -1,4 +1,4 @@
-import { Developer } from 'src/app/developers/developer.model';
+import { Developer } from '../developers/developer.model';
 
 enum Status {
     "New" , "Under Review" , "Fixed" , "Spam",
@@ -8,26 +8,29 @@ enum Priority {
 }
 
 export class Bug {
-    id: number;
+    id: string;
     title: string;
     description: string;
     status: Status;
     priority: Priority;
     screenShot: string;
-    developerAssigned: Developer;
+    developerID: string;
+    developerName: string;
 
-    constructor(id: number, title: string, description: string, status: Status, priority: Priority, screenShot: string = null) {
+    constructor(id: string, title: string, description: string, status: Status, priority: Priority, screenShot: string = null, developerID: string = "", developerName: string = "") {
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
         this.priority = priority;
         this.screenShot = screenShot;
-        this.developerAssigned = null;
+        this.developerID = developerID;
+        this.developerName = developerName;
     }
 
     assignDeveloper(developer: Developer) {
-        this.developerAssigned = developer;
+        this.developerID = developer.id;
+        this.developerName = developer.firstName + " " + developer.lastName;
     }
 
     changeStatus(newStatus: Status) {

@@ -1,4 +1,8 @@
-<h1>{{developer.firstName}} {{developer.lastName}}</h1>
+<div *ngIf="developer">
+<div class="row" style="margin: auto;display: flex;justify-content: space-between; align-items: center;">
+    <h1>{{developer.firstName}} {{developer.lastName}}</h1> 
+    <div><a [routerLink]="['/developers', id, 'edit']"><button class="btn btn-outline-secondary">Edit Developer</button></a></div> 
+</div>
 <hr>
 <h5>Bugs Assigned</h5>
 <div class="list-group">
@@ -8,4 +12,5 @@
     <a  class="list-group-item list-group-item-action">
         Bug 2
       </a>
+</div>
 </div>
