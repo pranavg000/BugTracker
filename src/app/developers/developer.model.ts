@@ -6,7 +6,7 @@ export class Developer {
     lastName: string;
     email: string;
 
-    constructor(id: string, firstName: string, lastName: string, email: string, bugsAssigned: Bug[] = []) {
+    constructor(id: string, firstName: string, lastName: string, email: string) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

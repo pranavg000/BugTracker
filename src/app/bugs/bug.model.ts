@@ -1,11 +1,5 @@
 import { Developer } from '../developers/developer.model';
-
-enum Status {
-    "New" , "Under Review" , "Fixed" , "Spam",
-}
-enum Priority {
-    "High" , "Medium" , "Low",
-}
+import { Status, Priority } from './dataTypes/enums';
 
 export class Bug {
     id: string;

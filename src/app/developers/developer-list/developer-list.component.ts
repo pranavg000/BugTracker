@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Developer } from '../developer.model';
 import { DeveloperService } from '../developer.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -16,6 +15,7 @@ export class DeveloperListComponent implements OnInit, OnDestroy {
   constructor(private developerService: DeveloperService) { }
 
   ngOnInit(): void {
+    this.developers = this.developerService.getDevelopers();
     this.devServiceSubscription = this.developerService.developersChanged.subscribe((developers: Developer[]) => {
       this.developers = developers;
     })

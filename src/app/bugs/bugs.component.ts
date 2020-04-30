@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
 import { Bug } from './bug.model';
+import { BugService } from './bug.service';
 
 @Component({
   selector: 'app-bugs',
@@ -10,17 +10,18 @@ import { Bug } from './bug.model';
 })
 export class BugsComponent implements OnInit, OnDestroy {
   bugs: Bug[];
-  fireStoreSubscription: Subscription;
-  constructor(private firestore: AngularFirestore) { }
+  bugServiceSubscription: Subscription;
+  constructor(private bugService: BugService) { }
 
   ngOnInit(): void {
-    this.fireStoreSubscription = this.firestore.collection('bugs').valueChanges({idField: 'id'}).subscribe((data: Bug[]) => {
-      this.bugs = data;
-    });
+    this.bugs = this.bugService.getBugs();
+    this.bugServiceSubscription = this.bugService.bugsChanged.subscribe((bugs: Bug[]) => {
+      this.bugs = bugs;
+    })
   }
 
   ngOnDestroy(): void {
-    this.fireStoreSubscription.unsubscribe();
+    this.bugServiceSubscription.unsubscribe();
   }
 
 }

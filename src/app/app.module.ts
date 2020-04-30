@@ -20,8 +20,8 @@ import { DeveloperService } from './developers/developer.service';
 import { FormsModule } from '@angular/forms';
 import { BugListComponent } from './bugs/bug-list/bug-list.component';
 import { BugListItemComponent } from './bugs/bug-list/bug-list-item/bug-list-item.component';
-import { BugStartComponent } from './bugs/bug-start/bug-start.component';
 import { BugEditComponent } from './bugs/bug-edit/bug-edit.component';
+import { BugService } from './bugs/bug.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,6 @@ import { BugEditComponent } from './bugs/bug-edit/bug-edit.component';
     DeveloperListItemComponent,
     BugListComponent,
     BugListItemComponent,
-    BugStartComponent,
     BugEditComponent
   ],
   imports: [
@@ -48,7 +47,7 @@ import { BugEditComponent } from './bugs/bug-edit/bug-edit.component';
     AngularFireAnalyticsModule,
     AngularFirestoreModule
   ],
-  providers: [DeveloperService],
+  providers: [DeveloperService, BugService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
