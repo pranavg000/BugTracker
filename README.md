@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
 
+## About
+This is a Bug Tracking app made using AngularJS, and firebase as backend.
+
+### Functionalities
+* Users can report new Bugs(can also add screenshot and urgency status)
+* Create new Developers,
+* Assign Developers to Bugs
+* All data is synced with the database in real-time. 
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
