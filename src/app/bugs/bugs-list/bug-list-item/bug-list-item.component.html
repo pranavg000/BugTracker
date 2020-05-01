@@ -1,0 +1,6 @@
+<th scope="row">{{bug.id | slice: 0: 5}}</th>
+<td>{{bug.title}}</td>
+<td> <a [routerLink]="[bug.id, 'changestatus']">  {{status[bug.status]}}</a> </td>
+<td>{{priority[bug.priority]}}</td>
+<td *ngIf="bug.developerID; else notAssignedBlock">{{bug.developerName}}</td>
+<ng-template #notAssignedBlock> <td> Not Assigned </td></ng-template>

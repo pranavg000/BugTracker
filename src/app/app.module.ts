@@ -18,10 +18,11 @@ import { DeveloperEditComponent } from './developers/developer-edit/developer-ed
 import { DeveloperListItemComponent } from './developers/developer-list/developer-list-item/developer-list-item.component';
 import { DeveloperService } from './developers/developer.service';
 import { FormsModule } from '@angular/forms';
-import { BugListComponent } from './bugs/bug-list/bug-list.component';
-import { BugListItemComponent } from './bugs/bug-list/bug-list-item/bug-list-item.component';
+import { BugListItemComponent } from './bugs/bugs-list/bug-list-item/bug-list-item.component';
 import { BugEditComponent } from './bugs/bug-edit/bug-edit.component';
 import { BugService } from './bugs/bug.service';
+import { BugsListComponent } from './bugs/bugs-list/bugs-list.component';
+import { BugAssignComponent } from './bugs/bug-assign/bug-assign.component';
 
 @NgModule({
   declarations: [
@@ -35,9 +36,10 @@ import { BugService } from './bugs/bug.service';
     DeveloperStartComponent,
     DeveloperEditComponent,
     DeveloperListItemComponent,
-    BugListComponent,
     BugListItemComponent,
-    BugEditComponent
+    BugEditComponent,
+    BugsListComponent,
+    BugAssignComponent,
   ],
   imports: [
     BrowserModule,

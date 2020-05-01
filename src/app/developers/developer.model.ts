@@ -12,20 +12,5 @@ export class Developer {
         this.lastName = lastName;
         this.email = email;
     }
-
-    assignNewBug(bug: Bug) {
-        // this.bugsAssigned.push(bug);
-    }
-
-    removeBug(index: number) {
-        // if(index < this.bugsAssigned.length)
-        //     this.bugsAssigned.splice(index, 1);
-    }
-
-    update(value: {}){
-        this.firstName = value['firstName'];
-        this.lastName = value['lastName'];
-        this.email = value['email'];
-    }
 }
 

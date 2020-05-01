@@ -1,27 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Bug } from './bug.model';
-import { BugService } from './bug.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-bugs',
   templateUrl: './bugs.component.html',
   styleUrls: ['./bugs.component.css']
 })
-export class BugsComponent implements OnInit, OnDestroy {
-  bugs: Bug[];
-  bugServiceSubscription: Subscription;
-  constructor(private bugService: BugService) { }
+export class BugsComponent implements OnInit {
+  constructor() { }
 
   ngOnInit(): void {
-    this.bugs = this.bugService.getBugs();
-    this.bugServiceSubscription = this.bugService.bugsChanged.subscribe((bugs: Bug[]) => {
-      this.bugs = bugs;
-    })
   }
-
-  ngOnDestroy(): void {
-    this.bugServiceSubscription.unsubscribe();
-  }
-
 }

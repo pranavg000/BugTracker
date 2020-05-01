@@ -8,7 +8,6 @@ import { Developer } from '../../developer.model';
 })
 export class DeveloperListItemComponent implements OnInit {
   @Input() developer: Developer;
-  @Input() index: string;
   constructor() { }
 
   ngOnInit(): void {

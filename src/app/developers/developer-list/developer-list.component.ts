@@ -15,10 +15,9 @@ export class DeveloperListComponent implements OnInit, OnDestroy {
   constructor(private developerService: DeveloperService) { }
 
   ngOnInit(): void {
-    this.developers = this.developerService.getDevelopers();
-    this.devServiceSubscription = this.developerService.developersChanged.subscribe((developers: Developer[]) => {
+    this.devServiceSubscription = this.developerService.getDevelopers().subscribe((developers: Developer[]) => {
       this.developers = developers;
-    })
+    });
   }
 
   ngOnDestroy(): void {

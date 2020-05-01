@@ -10,3 +10,8 @@ input.ng-valid.ng-touched , input.ng-valid.ng-dirty {
     color: rgb(201, 3, 3);
 }
 
+.form-group {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+

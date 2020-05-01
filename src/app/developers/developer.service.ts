@@ -7,18 +7,11 @@ import { IDeveloperTemp } from './developer-temp.interface';
 
 @Injectable()
 export class DeveloperService {
-    developers: Developer[];
-    developersChanged = new Subject<Developer[]>();
     developerDocRef: AngularFirestoreDocument<IDeveloperTemp>;
     fireStoreSubscription: Subscription;
     
 
-    constructor(private firestore: AngularFirestore) {
-        this.fireStoreSubscription = this.firestore.collection('developers').valueChanges({idField: 'id'}).subscribe((data: Developer[]) => {
-            this.developers = data;
-            this.developersChanged.next(this.developers);
-        });
-    }
+    constructor(private firestore: AngularFirestore) {}
     
     async addNewDeveloper(value: IDeveloperTemp): Promise<string> {
         let ref = await this.firestore.collection('developers').add(value);
@@ -34,8 +27,8 @@ export class DeveloperService {
         return <Observable<IDeveloperTemp>> this.developerDocRef.valueChanges();
     }
 
-    getDevelopers(): Developer[] {
-        return this.developers;
+    getDevelopers(): Observable<Developer[]> {
+        return <Observable<Developer[]>> this.firestore.collection('developers').valueChanges({idField: 'id'});
     }
 
 }
