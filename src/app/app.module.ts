@@ -22,7 +22,11 @@ import { BugListItemComponent } from './bugs/bugs-list/bug-list-item/bug-list-it
 import { BugEditComponent } from './bugs/bug-edit/bug-edit.component';
 import { BugService } from './bugs/bug.service';
 import { BugsListComponent } from './bugs/bugs-list/bugs-list.component';
-import { BugAssignComponent } from './bugs/bug-assign/bug-assign.component';
+import { AuthService } from './auth/auth.service';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { DeveloperEditGuard } from './developers/developer-edit/dev-edit-guard.service';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { BugAssignComponent } from './bugs/bug-assign/bug-assign.component';
     BugListItemComponent,
     BugEditComponent,
     BugsListComponent,
-    BugAssignComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,7 @@ import { BugAssignComponent } from './bugs/bug-assign/bug-assign.component';
     AngularFireAnalyticsModule,
     AngularFirestoreModule
   ],
-  providers: [DeveloperService, BugService],
+  providers: [DeveloperService, BugService, AuthService, DeveloperEditGuard, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

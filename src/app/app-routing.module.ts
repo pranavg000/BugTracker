@@ -8,25 +8,30 @@ import { DeveloperComponent } from './developers/developer/developer.component';
 import { DeveloperEditComponent } from './developers/developer-edit/developer-edit.component';
 import { BugsListComponent } from './bugs/bugs-list/bugs-list.component';
 import { BugListItemComponent } from './bugs/bugs-list/bug-list-item/bug-list-item.component';
-import { BugAssignComponent } from './bugs/bug-assign/bug-assign.component';
 import { BugEditComponent } from './bugs/bug-edit/bug-edit.component';
 import { BugComponent } from './bugs/bug/bug.component';
+import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { DeveloperEditGuard } from './developers/developer-edit/dev-edit-guard.service';
 
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'developers', component: DevelopersComponent, children: [
+    { path: 'developers', component: DevelopersComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin }, children: [
         {path: '', component: DeveloperStartComponent},
-        {path: 'new', component: DeveloperEditComponent},
         {path: ':id', component: DeveloperComponent},
-        {path: ':id/edit', component: DeveloperEditComponent},
+        {path: ':id/edit', component: DeveloperEditComponent, canActivate: [DeveloperEditGuard]},
     ]},
-    { path: 'bugs', component: BugsComponent, children:[
+    { path: 'bugs', component: BugsComponent, canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectUnauthorizedToLogin },  children:[
         {path: '', component: BugsListComponent},
         {path: 'new', component: BugEditComponent},
         {path: ':id', component: BugComponent},
-        {path: ':id/assigndev', component: BugAssignComponent},
-        {path: ':id/changestatus', component: BugEditComponent},
     ] },
+    { path: 'login', component: LoginComponent},
+    { path: 'register', component: RegisterComponent},
+
+    
 ]
 
 @NgModule({

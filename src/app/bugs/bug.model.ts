@@ -13,33 +13,15 @@ export class Bug {
     screenshot: string;
     developerID: string;
     developerName: string;
-
-    // constructor(id: string, title: string, description: string, status: Status, priority: Priority, screenShot: string = null, developerID: string = "", developerName: string = "") {
-    //     this.id = id;
-    //     this.title = title;
-    //     this.description = description;
-    //     this.status = status;
-    //     this.priority = priority;
-    //     this.screenShot = screenShot;
-    //     this.developerID = developerID;
-    //     this.developerName = developerName;
-    // }
+    dueDate: Date;
 
     constructor(obj: IBug) {
         Object.assign(this, obj);
-        // this.id = obj.id;
-        // this.title = obj.title;
-        // this.description = obj.description;
-        // this.status = obj.status;
-        // this.priority = obj.priority;
-        // this.screenShot = obj.screenShot;
-        // this.developerID = obj.developerID;
-        // this.developerName = obj.developerName;
     }
 
     assignDeveloper(developer: Developer) {
         this.developerID = developer.id;
-        this.developerName = developer.firstName + " " + developer.lastName;
+        this.developerName = developer.fullName;
     }
 
     changeStatus(newStatus: Status) {

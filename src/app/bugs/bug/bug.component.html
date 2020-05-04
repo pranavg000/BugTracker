@@ -44,20 +44,31 @@
             <span class="sr-only">Toggle Dropdown</span>
           </button>
           <div class="dropdown-menu">
-            <div *ngFor="let dev of developers" class="dropdown-item" (click)="onNewDevAssigned(dev)" style="cursor: pointer;"> {{ dev.firstName + " " + dev.lastName }} </div>
+            <div *ngFor="let dev of developers" class="dropdown-item" (click)="onNewDevAssigned(dev)" style="cursor: pointer;"> {{ dev.fullName}} </div>
           </div>
         </div> 
       </td>
     </ng-template>
     </tr>
+    <tr [ngStyle]="{visibility: (bug.developerID || newDevAssigned) ? 'visible' : 'hidden'}">
+      <th>Due Date</th>
+      <td *ngIf="bug.developerID" >
+        {{ bug.dueDate }}
+      </td>
+      <td *ngIf="!bug.developerID" >
+          <input type="date" class="form-control" id="dueDate" name="dueDate" (change)="onDueDateChange()" required #dueDate>
+      </td>
+      
+    </tr>
     <tr *ngIf="bug.screenshot">
       <th scope="row">Screenshot</th>
       <td> 
-        <a [href]="screenshotUrl | async" target="_blank"> <img [src]="screenshotUrl | async" class="screenshot-img"> </a>
+        <a [href]="bug.screenshot" target="_blank"> <img [src]="bug.screenshot" class="screenshot-img"> </a>
       </td>
     </tr>
   </tbody>
 </table>
-<button *ngIf="newDevAssigned || statusChanged" class="btn btn-primary"  (click)="onSaveClick()" style="margin-left: 13px;" > Save </button>
+<button *ngIf="newDevAssigned || statusChanged" class="btn btn-primary" [disabled]="!formIsValid" (click)="onSaveClick()" style="margin-left: 13px;" > Save </button>
 </div> 
 
+<!-- [disabled]="dueDate.nativeElement.value" -->

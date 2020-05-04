@@ -1,7 +1,7 @@
 <div *ngIf="developer">
 <div class="row" style="margin: auto;display: flex;justify-content: space-between; align-items: center;">
-    <h1>{{developer.firstName}} {{developer.lastName}}</h1> 
-    <div><a [routerLink]="['/developers', id, 'edit']"><button class="btn btn-outline-secondary">Edit Developer</button></a></div> 
+    <h1>{{developer.fullName}}</h1> 
+    <div *ngIf="authService.user.uid === id"><a [routerLink]="['/developers', id, 'edit']"><button class="btn btn-outline-secondary">Update Profile</button></a></div> 
 </div>
 <hr>
 <h5>Bugs Assigned</h5>

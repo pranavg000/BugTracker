@@ -1,7 +1,7 @@
 import { Developer } from './developer.model';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Injectable, ElementRef } from '@angular/core';
-import { Subscription, Subject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
 import { IDeveloperTemp } from './developer-temp.interface';
 
 
@@ -13,13 +13,13 @@ export class DeveloperService {
 
     constructor(private firestore: AngularFirestore) {}
     
-    async addNewDeveloper(value: IDeveloperTemp): Promise<string> {
-        let ref = await this.firestore.collection('developers').add(value);
-        return ref.id;
+    async addNewDeveloper(value: IDeveloperTemp, id: string): Promise<string> {
+        let ref = await this.firestore.collection('developers').doc(id).set(value);
+        return id;
     }
 
     updateDeveloper(id: string, value: IDeveloperTemp) {
-        this.developerDocRef.set(value);
+        this.firestore.doc('developers/'+id).set(value);
     }
 
     getDeveloper(id: string): Observable<IDeveloperTemp> {

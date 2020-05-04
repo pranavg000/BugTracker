@@ -1,5 +1,10 @@
 export interface IDeveloperTemp {
-    firstName: string;
-    lastName: string;
+    fullName: string;
+    email: string;
+}
+
+export interface IDeveloper {
+    id: string;
+    fullName: string;
     email: string;
 }

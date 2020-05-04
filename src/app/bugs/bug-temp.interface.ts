@@ -8,6 +8,7 @@ export interface IBugTemp {
     screenshot?: string;
     developerID: string;
     developerName: string;
+    dueDate: Date;
 }
 
 export interface IBug {
@@ -19,4 +20,5 @@ export interface IBug {
     screenshot?: string;
     developerID?: string;
     developerName?: string;
+    dueDate?: Date;
 }

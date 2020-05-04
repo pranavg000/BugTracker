@@ -2,14 +2,12 @@ import { Bug } from 'src/app/bugs/bug.model';
 
 export class Developer {
     id: string;
-    firstName: string;
-    lastName: string;
+    fullName: string;
     email: string;
 
-    constructor(id: string, firstName: string, lastName: string, email: string) {
+    constructor(id: string, fullName: string, email: string) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.fullName = fullName;
         this.email = email;
     }
 }

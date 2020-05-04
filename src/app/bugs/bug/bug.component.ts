@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Bug } from '../bug.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -29,7 +29,11 @@ export class BugComponent implements OnInit, OnDestroy {
   newDevAssigned = false;
   newDevName: string = "Not Assigned";
   newDeveloper: Developer;
-  screenshotUrl;
+  // screenshotUrl;
+
+  @ViewChild('dueDate') dueDateEl: ElementRef;
+  formIsValid: boolean = true;
+
   constructor(private route: ActivatedRoute, private bugService: BugService, 
               private developerService: DeveloperService, private storage: AngularFireStorage ) { }
 
@@ -46,17 +50,20 @@ export class BugComponent implements OnInit, OnDestroy {
           data['id'] = this.id;
           this.bug = new Bug(<IBug> data);
           // console.log(this.bug);
-          if(this.bug.screenshot)
-            this.screenshotUrl = this.storage.ref(this.bug.screenshot).getDownloadURL();
+          // if(this.bug.screenshot)
+          //   this.screenshotUrl = this.storage.ref(this.bug.screenshot).getDownloadURL();
         });
       }
     );
   }
 
   onNewDevAssigned(dev: Developer) {
+    if(!this.newDevAssigned)
+      this.formIsValid = false;
     this.newDevAssigned = true;
-    this.newDevName = dev.firstName + " " + dev.lastName;
+    this.newDevName = dev.fullName;
     this.newDeveloper = dev;
+    
   }
 
   onChangeStatusFrontend(newStatus) {
@@ -68,6 +75,11 @@ export class BugComponent implements OnInit, OnDestroy {
     this.onChangeStatusFrontend(newStatus);
   }
 
+  onDueDateChange() {
+    if(this.dueDateEl.nativeElement.value)
+      this.formIsValid = true;
+    else this.formIsValid = false;
+  }
 
 
   ngOnDestroy(): void {
@@ -76,10 +88,9 @@ export class BugComponent implements OnInit, OnDestroy {
   }
 
   async onSaveClick() {
-    await this.bugService.updateBug(this.statusChanged, this.newDevAssigned, this.bug.status, this.newDeveloper);
+    await this.bugService.updateBug(this.statusChanged, this.newDevAssigned, this.bug.status, this.newDeveloper, this.dueDateEl.nativeElement.value);
     this.newDevAssigned = false;
     this.statusChanged = false;
   }
-
 
 }

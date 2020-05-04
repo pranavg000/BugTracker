@@ -1,1 +1,29 @@
-<h3> Welcome to Bug Tracker </h3>
+
+
+<div class="row" style="margin: auto;display: flex;justify-content: space-between; align-items: center;">
+    <h3> Welcome to Bug Tracker </h3>
+    <div *ngIf="!authService.isLoggedIn" class="btn-group">
+        <button class="btn btn-secondary btn-sm" disabled type="button">
+        Anonymous
+        </button>
+        <button title="Change Status" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+        <a [routerLink]="['/login']" style="text-decoration: none;"> <div class="dropdown-item"  style="cursor: pointer;"> Login </div> </a>
+        <a [routerLink]="['/register']" style="text-decoration: none;"> <div class="dropdown-item"  style="cursor: pointer;"> Register </div> </a>
+        </div>
+    </div> 
+    <div *ngIf="authService.isLoggedIn" class="btn-group">
+        <button class="btn btn-secondary btn-sm" disabled type="button">
+        {{ authService.user.email }}
+        </button>
+        <button title="Change Status" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+        <div class="dropdown-item" (click)="onLogoutClick()" style="cursor: pointer;"> Logout </div>
+        <!-- <div class="dropdown-item"  style="cursor: pointer;"> Register </div> -->
+        </div>
+    </div> 
+</div>

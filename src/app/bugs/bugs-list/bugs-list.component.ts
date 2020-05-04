@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { BugService } from '../bug.service';
 import { Bug } from '../bug.model';
 import { Routes, ActivatedRoute, Params } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { IBug } from '../bug-temp.interface';
 
 @Component({
   selector: 'app-bugs-list',
@@ -14,7 +16,7 @@ export class BugsListComponent implements OnInit, OnDestroy {
   bugs: Bug[];
   inDev: boolean = false;
   bugServiceSubscription: Subscription;
-  constructor(private bugService: BugService, private route: ActivatedRoute) { }
+  constructor(private bugService: BugService, private route: ActivatedRoute, public authService: AuthService) { }
 
   ngOnInit(): void {
     let devID = this.route.snapshot.params['id']

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Bug } from './bug.model';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Subscription, Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IBugTemp, IBug } from './bug-temp.interface';
-import { Status, Priority } from './dataTypes/enums';
 import { Developer } from '../developers/developer.model';
 
 @Injectable()
@@ -18,10 +17,10 @@ export class BugService {
         return ref.id;
     }
 
-    updateBug(statChanged: boolean, devAssigned: boolean, newStat: number, dev: Developer) {
+    updateBug(statChanged: boolean, devAssigned: boolean, newStat: number, dev: Developer, date: string) {
         let newData = {};
         if(statChanged) newData['status'] = newStat;
-        if(devAssigned) { newData['developerID'] = dev.id; newData['developerName'] = dev.firstName + " " + dev.lastName;}
+        if(devAssigned) { newData['developerID'] = dev.id; newData['developerName'] = dev.fullName; newData['dueDate'] = date; }
         if(newData)
             this.bugDocRef.update(newData);
     }
@@ -31,12 +30,12 @@ export class BugService {
         return <Observable<IBugTemp>> this.bugDocRef.valueChanges();
     }
 
-    getBugs(): Observable<Bug[]> {
-        return <Observable<Bug[]>> this.firestore.collection('bugs').valueChanges({idField: 'id'});
+    getBugs(): Observable<IBug[]> {
+        return <Observable<IBug[]>> this.firestore.collection('bugs').valueChanges({idField: 'id'});
     }
 
     deleteBug(id: string): void {
-        this.bugDocRef.delete();
+        this.firestore.doc('bugs/'+id).delete();
     }
 
     getBugsDev(devID: string) {

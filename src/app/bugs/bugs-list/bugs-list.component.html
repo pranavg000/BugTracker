@@ -1,4 +1,5 @@
-<a routerLink="new" *ngIf="!inDev"> <button class="btn btn-outline-secondary"> Add a Bug </button></a>
+<a routerLink="new" *ngIf="!inDev"> <button class="btn btn-outline-secondary"> Add a Bug </button></a> &nbsp;
+<a [routerLink]="['/developers', authService.user.uid]" *ngIf="!inDev"> <button class="btn btn-outline-secondary"> My assigned Bugs </button></a>
 <hr>   
 <table class="table table-hover">
   <thead class="thead-light">
@@ -8,9 +9,10 @@
       <th scope="col">Status</th>
       <th scope="col">Priority</th>
       <th scope="col">Developer</th>
+      <th scope="col">Due Date</th>
     </tr>
   </thead>
   <tbody>
-    <tr [routerLink]="['/bugs',bug.id]" app-bug-list-item *ngFor="let bug of bugs; let i = index" [index]="i" [bug]="bug"></tr>
+    <tr style="cursor: pointer" [routerLink]="['/bugs',bug.id]" app-bug-list-item *ngFor="let bug of bugs; let i = index" [index]="i" [bug]="bug"></tr>
   </tbody>
 </table>

@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { DeveloperService } from '../developer.service';
 import { Subscription } from 'rxjs';
 import { IDeveloperTemp } from '../developer-temp.interface';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-developer',
@@ -15,7 +16,7 @@ export class DeveloperComponent implements OnInit, OnDestroy {
   developer: Developer;
   id: string;
   devServiceSubscription: Subscription;
-  constructor(private route: ActivatedRoute, private developerService: DeveloperService ) { }
+  constructor(private route: ActivatedRoute, private developerService: DeveloperService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -24,7 +25,7 @@ export class DeveloperComponent implements OnInit, OnDestroy {
         if(this.devServiceSubscription)
           this.devServiceSubscription.unsubscribe();
         this.devServiceSubscription = this.developerService.getDeveloper(this.id).subscribe((data: IDeveloperTemp) => {
-          this.developer = new Developer(this.id, data['firstName'], data['lastName'], data['email']);
+          this.developer = new Developer(this.id, data['fullName'], data['email']);
         });
       }
     )
