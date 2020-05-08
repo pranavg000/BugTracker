@@ -4,7 +4,6 @@ import { Status, Priority } from '../dataTypes/enums';
 import { BugService } from '../bug.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { tap, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-bug-edit',
