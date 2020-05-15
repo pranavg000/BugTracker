@@ -1,9 +1,6 @@
 # BugTracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
-
-## About
-This is a Bug Tracking app made using AngularJS, and firebase as backend.
+This is a reponsive Bug Tracking WebApp made using AngularJS for Frontend and Google Firebase as Backend.
 
 ### Functionalities
 * Users can report new Bugs(can also add screenshot and urgency status)
