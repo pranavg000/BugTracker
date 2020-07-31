@@ -1,11 +1,12 @@
 # BugTracker
 
-This is a reponsive Bug Tracking WebApp made using AngularJS for Frontend and Google Firebase as Backend.
+This is a responsive Bug Tracking WebApp made using AngularJS, and Google Cloud Firestore, which allows users to add, update and assign bugs to developers. All that is being synced with the database in real time. a reponsive Bug Tracking WebApp made using AngularJS for Frontend and Google Firebase as Backend.
 
 ### Functionalities
 * Users can report new Bugs(can also add screenshot and urgency status)
-* Create new Developers,
+* Create new Developers
 * Assign Developers to Bugs
+* Assign Priorities to Bugs
 * All data is synced with the database in real-time. 
 
 
