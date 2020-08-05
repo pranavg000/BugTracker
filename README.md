@@ -9,6 +9,9 @@ This is a responsive Bug Tracking WebApp made using AngularJS, and Google Cloud 
 * Assign Priorities to Bugs
 * All data is synced with the database in real-time. 
 
+### Screenshots
+![](screenshots/bug.png)
+![](screenshots/bug1.png)
 
 ## Development server
 
