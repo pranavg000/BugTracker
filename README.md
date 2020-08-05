@@ -11,7 +11,8 @@ This is a responsive Bug Tracking WebApp made using AngularJS, and Google Cloud 
 
 ### Screenshots
 ![](screenshots/bug.png)
-![](screenshots/bug1.png)
+
+![](screenshots/bug2.png)
 
 ## Development server
 
